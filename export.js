@@ -238,7 +238,7 @@ else
 		return new Promise(function (resolve, reject) 
 		{
 			childProcess.execFile(binPath, args, {
-				timeout: 5000 //120 sec - 2 mins
+				timeout: 25000 //25 sec
 			}, (error, stdout, stderr) =>
 			{
 				if (error) 
@@ -381,7 +381,7 @@ else
 					setTimeout(function()
 					{
 						browser.close();
-					}, 5000);
+					}, 30000);
 					
 					const page = await browser.newPage();
 					await page.setContent(html, {waitUntil: "networkidle0"});
@@ -557,7 +557,7 @@ else
 						setTimeout(function()
 						{
 							browser.close();
-						}, 5000);
+						}, 30000);
 						
 						const page = await browser.newPage();
 
@@ -583,9 +583,7 @@ else
 							}, req.body, pageIndex);
 
 							//default timeout is 30000 (30 sec)
-							await page.waitForSelector('#LoadingComplete', {
-								timeout: 5000
-							});
+							await page.waitForSelector('#LoadingComplete');
 							
 							var bounds = await page.mainFrame().$eval('#LoadingComplete', div => div.getAttribute('bounds'));
 							var pageId = await page.mainFrame().$eval('#LoadingComplete', div => div.getAttribute('page-id'));
@@ -763,8 +761,8 @@ else
 						{
 							browser.close();
 						}
-						console.log('error => ', e)
-						res.status(500).end("Error!", e);
+						
+						res.status(500).end(e);
 						
 						var ip = (req.headers['x-forwarded-for'] ||
 									req.connection.remoteAddress ||
