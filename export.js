@@ -763,8 +763,8 @@ else
 						{
 							browser.close();
 						}
-						
-						res.status(500).end("Error!");
+						console.log('error => ', e)
+						res.status(500).end("Error!", e);
 						
 						var ip = (req.headers['x-forwarded-for'] ||
 									req.connection.remoteAddress ||
