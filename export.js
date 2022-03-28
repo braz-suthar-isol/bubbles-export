@@ -238,7 +238,7 @@ else
 		return new Promise(function (resolve, reject) 
 		{
 			childProcess.execFile(binPath, args, {
-				timeout: 120000 //120 sec - 2 mins
+				timeout: 5000 //120 sec - 2 mins
 			}, (error, stdout, stderr) =>
 			{
 				if (error) 
@@ -381,7 +381,7 @@ else
 					setTimeout(function()
 					{
 						browser.close();
-					}, 120000);
+					}, 5000);
 					
 					const page = await browser.newPage();
 					await page.setContent(html, {waitUntil: "networkidle0"});
@@ -557,7 +557,7 @@ else
 						setTimeout(function()
 						{
 							browser.close();
-						}, 120000);
+						}, 5000);
 						
 						const page = await browser.newPage();
 
@@ -584,7 +584,7 @@ else
 
 							//default timeout is 30000 (30 sec)
 							await page.waitForSelector('#LoadingComplete', {
-								timeout: 120000
+								timeout: 5000
 							});
 							
 							var bounds = await page.mainFrame().$eval('#LoadingComplete', div => div.getAttribute('bounds'));
