@@ -381,7 +381,7 @@ else
 					setTimeout(function()
 					{
 						browser.close();
-					}, 30000);
+					}, 120000);
 					
 					const page = await browser.newPage();
 					await page.setContent(html, {waitUntil: "networkidle0"});
@@ -557,7 +557,7 @@ else
 						setTimeout(function()
 						{
 							browser.close();
-						}, 30000);
+						}, 120000);
 						
 						const page = await browser.newPage();
 
@@ -583,7 +583,9 @@ else
 							}, req.body, pageIndex);
 
 							//default timeout is 30000 (30 sec)
-							await page.waitForSelector('#LoadingComplete');
+							await page.waitForSelector('#LoadingComplete', {
+								timeout: 120000
+							});
 							
 							var bounds = await page.mainFrame().$eval('#LoadingComplete', div => div.getAttribute('bounds'));
 							var pageId = await page.mainFrame().$eval('#LoadingComplete', div => div.getAttribute('page-id'));
